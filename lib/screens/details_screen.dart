@@ -20,7 +20,7 @@ class DetailsScreen extends StatelessWidget {
               movie: movie,
             ),
             _Overview(movie: movie),
-            CastingCards()
+            CastingCards(movie.id)
           ]))
         ],
       ),
@@ -58,6 +58,7 @@ class _CustomAppBar extends StatelessWidget {
             image: NetworkImage(movie.fullBackdropPath),
             fit:
                 BoxFit.cover // para que se expanda la imagen sin perder calidad
+
             ),
       ),
     );
@@ -78,12 +79,15 @@ class _PosterAndTitle extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: FadeInImage(
-              placeholder: AssetImage('assets/no-image.jpg'),
-              image: NetworkImage(movie.fullPosterImg),
-              height: 150,
+          Hero(
+            tag: movie.heroId!,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                placeholder: AssetImage('assets/no-image.jpg'),
+                image: NetworkImage(movie.fullPosterImg),
+                height: 150,
+              ),
             ),
           ),
           SizedBox(width: 20),
